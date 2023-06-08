@@ -83,7 +83,7 @@ metadata:
 type: Opaque
 stringData:
   password: ""
-  username: "1025251"
+  username: "admin"
 ---
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: Integration
@@ -138,24 +138,15 @@ spec:
     - basicAuth:
         password:
           key: password
-          name: prom-secret
+          name: metrics-secret
         username:
           key: username
-          name: prom-secret
+          name: metrics-secret
       url: [prom_push_url]
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector:
     matchLabels:
       instance: primary
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: prom-secret
-type: Opaque
-data:
-  username: admin
-  password: ""
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -496,7 +487,7 @@ spec:
           name: logs-secret
       externalLabels:
         cluster: eks-9
-      url: https://logs-prod-006.grafana.net/loki/api/v1/push
+      url: [loki_push_url]
   podLogsNamespaceSelector: {}
   podLogsSelector:
     matchLabels:
