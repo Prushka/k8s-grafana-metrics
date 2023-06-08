@@ -38,7 +38,6 @@ services:
       - --web.console.templates=/usr/share/prometheus/consoles
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
-      - ./config/web.yaml:/etc/prometheus/web.yaml
       - ./config/rules.yaml:/etc/prometheus/rules.yaml
     depends_on:
       - "mimir-1"
