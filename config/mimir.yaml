@@ -3,6 +3,8 @@
 # Run Mimir in single process mode, with all components running in 1 process. 
 target: all,alertmanager,overrides-exporter
 
+multitenancy_enabled: false
+
 limits:
   # Allow ingestion of out-of-order samples up to 5 minutes since the latest received sample for the series.
   out_of_order_time_window: 5m
