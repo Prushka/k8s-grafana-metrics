@@ -22,7 +22,7 @@ services:
     volumes:
       - "./grafana:/var/lib/grafana"
       - "./config/grafana-provisioning-dashboards.yaml:/etc/grafana/provisioning/dashboards/provisioning-dashboards.yaml:ro"
-      - "./dashboards:/var/lib/grafana/dashboards/k8s:ro"
+      - "./dashboards:/var/lib/grafana/dashboards:ro"
     restart: unless-stopped
     environment:
       - GF_SECURITY_ALLOW_EMBEDDING=true
