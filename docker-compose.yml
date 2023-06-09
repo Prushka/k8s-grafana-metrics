@@ -1,10 +1,10 @@
 version: '3.4'
 services:
   loki:
-        container_name: loki
-        image: 'grafana/loki'
-        ports:
-            - "9093:3100"
+    container_name: loki
+    image: 'grafana/loki'
+    volumes:
+      - loki-data:/loki
   minio:
     image: minio/minio
     entrypoint: [""]
@@ -53,8 +53,10 @@ services:
       - "mimir-1"
       - "mimir-2"
       - "mimir-3"
+      - "loki"
     ports:
       - "9009:9009"
+      - "9010:9010"
 
   mimir-1:
     image: grafana/mimir:latest
@@ -94,3 +96,4 @@ volumes:
   mimir-2-data:
   mimir-3-data:
   minio-data:
+  loki-data:
