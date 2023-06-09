@@ -142,7 +142,7 @@ spec:
         username:
           key: username
           name: metrics-secret
-      url: [prom_push_url]
+      url: [mimir_push_url]
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector:
     matchLabels:
