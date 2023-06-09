@@ -21,10 +21,23 @@ services:
       - "3000:3000"
     volumes:
       - "./grafana:/var/lib/grafana"
+      - "./config/grafana-provisioning-dashboards.yaml:/etc/grafana/provisioning/dashboards/provisioning-dashboards.yaml:ro"
+      - "./dashboards/cluster.json:/var/lib/grafana/dashboards/cluster.json:ro"
+      - "./dashboards/home-kubernetes-integration.json:/var/lib/grafana/dashboards/home-kubernetes-integration.json:ro"
+      - "./dashboards/efficiency.json:/var/lib/grafana/dashboards/efficiency.json:ro"
+      - "./dashboards/multi-cluster.json:/var/lib/grafana/dashboards/multi-cluster.json:ro"
+      - "./dashboards/namespace-pods.json:/var/lib/grafana/dashboards/namespace-pods.json:ro"
+      - "./dashboards/namespace-workloads.json:/var/lib/grafana/dashboards/namespace-workloads.json:ro"
+      - "./dashboards/node-pods.json:/var/lib/grafana/dashboards/node-pods.json:ro"
+      - "./dashboards/pod.json:/var/lib/grafana/dashboards/pod.json:ro"
+      - "./dashboards/pv.json:/var/lib/grafana/dashboards/pv.json:ro"
+      - "./dashboards/workload.json:/var/lib/grafana/dashboards/workload.json:ro"
+      - "./dashboards/kubelet.json:/var/lib/grafana/dashboards/kubelet.json:ro"
     restart: unless-stopped
     environment:
       - GF_SECURITY_ALLOW_EMBEDDING=true
       - GF_RENDERER_PLUGIN_TZ=UTC
+      - GF_USERS_DEFAULT_THEME=light
     #  - GF_INSTALL_PLUGINS=grafana-clock-panel
 
   prometheus:
