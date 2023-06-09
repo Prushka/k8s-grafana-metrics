@@ -4,11 +4,11 @@
 target: all,alertmanager,overrides-exporter
 
 multitenancy_enabled: false
-max_label_names_per_series: 50
 
 limits:
   # Allow ingestion of out-of-order samples up to 5 minutes since the latest received sample for the series.
   out_of_order_time_window: 5m
+  max_label_names_per_series: 50
 
 # Configure Mimir to use Minio as object storage backend.
 common:
