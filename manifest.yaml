@@ -459,16 +459,6 @@ spec:
     matchLabels:
       app.kubernetes.io/name: kube-state-metrics
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: logs-secret
-  namespace: grafana-monitor
-type: Opaque
-stringData:
-  password: ""
-  username: "615231"
----
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: LogsInstance
 metadata:
@@ -481,10 +471,10 @@ spec:
     - basicAuth:
         password:
           key: password
-          name: logs-secret
+          name: metrics-secret
         username:
           key: username
-          name: logs-secret
+          name: metrics-secret
       externalLabels:
         cluster: eks-9
       url: [loki_push_url]
