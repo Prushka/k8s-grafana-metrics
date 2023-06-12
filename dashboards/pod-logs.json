@@ -109,7 +109,7 @@
             "uid": "a77b4c32-afa3-4027-9633-ec82d832f12d"
           },
           "editorMode": "code",
-          "expr": "sum(count_over_time({namespace=\"$namespace\", pod=~\"$pod\"} |~ \"$search\"[$__interval]))",
+          "expr": "sum(count_over_time({namespace=\"$namespace\", pod=~\"$pod\", filename=~\".*/$container/[^/]*$\"} |~ \"$search\"[$__interval]))",
           "legendFormat": "Log volume",
           "queryType": "range",
           "refId": "A"
@@ -148,7 +148,7 @@
             "uid": "a77b4c32-afa3-4027-9633-ec82d832f12d"
           },
           "editorMode": "code",
-          "expr": "{namespace=\"$namespace\", pod=~\"$pod\"} |~ \"$search\"",
+          "expr": "{namespace=\"$namespace\", pod=~\"$pod\", filename=~\".*/$container/[^/]*$\"} |~ \"$search\"",
           "queryType": "range",
           "refId": "A"
         }
@@ -191,9 +191,9 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "aws-monitor",
-          "value": "aws-monitor"
+          "selected": true,
+          "text": "prod-iot-rest-api",
+          "value": "prod-iot-rest-api"
         },
         "datasource": {
           "type": "prometheus",
@@ -221,9 +221,9 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "All",
-          "value": "$__all"
+          "selected": true,
+          "text": "iot-755f597565-nvbgg",
+          "value": "iot-755f597565-nvbgg"
         },
         "datasource": {
           "type": "prometheus",
@@ -237,6 +237,36 @@
         "options": [],
         "query": {
           "query": "label_values(kube_pod_info{job!=\"\", cluster=\"$cluster\", namespace=\"$namespace\"},pod)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": "iot",
+          "value": "iot"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "ae9dfaaa-0f1b-42d2-95be-7b3d77dd40c0"
+        },
+        "definition": "label_values(kube_pod_container_info{job!=\"\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"},container)",
+        "hide": 0,
+        "includeAll": true,
+        "multi": false,
+        "name": "container",
+        "options": [],
+        "query": {
+          "query": "label_values(kube_pod_container_info{job!=\"\", cluster=\"$cluster\", namespace=\"$namespace\", pod=\"$pod\"},container)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
@@ -290,6 +320,6 @@
   "timezone": "",
   "title": "Pod logs",
   "uid": "liz0yRCZz",
-  "version": 7,
+  "version": 10,
   "weekStart": ""
 }
