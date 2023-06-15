@@ -20,7 +20,6 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 13186,
   "graphTooltip": 0,
-  "id": 13,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -136,10 +135,10 @@
         "enableLogDetails": true,
         "prettifyLogMessage": false,
         "showCommonLabels": false,
-        "showLabels": true,
+        "showLabels": false,
         "showTime": true,
         "sortOrder": "Descending",
-        "wrapLogMessage": true
+        "wrapLogMessage": false
       },
       "targets": [
         {
@@ -148,7 +147,7 @@
             "uid": "a77b4c32-afa3-4027-9633-ec82d832f12d"
           },
           "editorMode": "code",
-          "expr": "{namespace=\"$namespace\", pod=~\"$pod\", filename=~\".*/$container/[^/]*$\"} |~ \"$search\"",
+          "expr": "{namespace=\"$namespace\", pod=~\"$pod\", filename=~\".*/$container/[^/]*$\"} |~ `$search` | json | unpack | line_format `{{.stream}}: {{.log}}`",
           "queryType": "range",
           "refId": "A"
         }
@@ -191,7 +190,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "prod-iot-rest-api",
           "value": "prod-iot-rest-api"
         },
@@ -221,7 +220,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "iot-755f597565-nvbgg",
           "value": "iot-755f597565-nvbgg"
         },
@@ -251,7 +250,7 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "iot",
           "value": "iot"
         },
@@ -320,6 +319,6 @@
   "timezone": "",
   "title": "Pod logs",
   "uid": "liz0yRCZz",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
